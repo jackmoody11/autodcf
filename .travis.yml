@@ -1,0 +1,34 @@
+sudo: false
+
+language: python
+
+matrix:
+  include:
+    - python: 3.5
+      dist: trusty
+    - python: 3.6
+      dist: trusty
+      env: DOCBUILD=true
+    - python: 3.7
+      dist: xenial
+      sudo: true
+    - python: 3.8
+
+install:
+  - pip install -qq flake8
+  - pip install pytest
+  - if [[ $DOCBUILD ]]; then
+    pip install doctr sphinx sphinx_rtd_theme ipython matplotlib;
+    fi
+  - python setup.py install
+
+script:
+  - set -e
+  - flake8 --version
+  - flake8 autodcf
+  - pytest autodcf/tests
+  - |
+    if [[ $DOCBUILD ]]; then
+      make -C docs html
+      doctr deploy . --built-docs docs/build/html/
+    fi
