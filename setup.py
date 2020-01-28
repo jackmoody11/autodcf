@@ -50,8 +50,7 @@ setup(
         author='Jack Moody',
         author_email='moodyjack11@gmail.com',
         description="""Build discounted cash flow (DCF) models with ease. Allows for advanced manipulation 
-        of future growth and exports to Excel.""",
-        # noqa: W291
+        of future growth and exports to Excel.""",  # noqa: W291
         long_description=LONG_DESCRIPTION,
         long_description_content_type='text/x-rst',
         entry_points='''
