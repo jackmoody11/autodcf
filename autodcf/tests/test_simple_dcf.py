@@ -1,5 +1,4 @@
 import numpy as np
-import numpy.testing as npt
 import pytest
 
 from autodcf.company import BalanceSheet, CashFlows, Company, IncomeStatement
