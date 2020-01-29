@@ -1,11 +1,16 @@
+import datetime
+
+
 class BalanceSheet:
     """Balance sheet for specific company at specific point in time. """
 
     def __init__(self,
                  assets,
-                 liabilities):
+                 liabilities,
+                 date=None):
         self._assets = assets
         self._liabilities = liabilities
+        self._date = date
 
     @property
     def assets(self):
@@ -30,3 +35,14 @@ class BalanceSheet:
     @property
     def debt_to_equity(self):
         return self.liabilities / self.equity
+
+    @property
+    def date(self):
+        return self._date
+
+    @date.setter
+    def date(self, val):
+        if isinstance(val, datetime.datetime):
+            self._date = val
+        else:
+            raise TypeError

@@ -8,8 +8,10 @@ def income_statement():
     return IncomeStatement(sales=100,
                            cogs=50,
                            sga=20,
+                           rd=0,
                            depreciation=3,
                            amortization=2,
+                           interest=0,
                            nonrecurring_cost=5,
                            tax=5)
 
