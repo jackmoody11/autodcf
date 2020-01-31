@@ -1,6 +1,7 @@
 import pytest
 
 from autodcf.company import BalanceSheet, CashFlows, IncomeStatement, Company
+from autodcf.models import SimpleDCF
 
 
 @pytest.fixture(scope='session')
@@ -34,3 +35,14 @@ def company(balance_sheet, cash_flows, income_statement):
                    balance_sheet=balance_sheet,
                    cash_flows=cash_flows,
                    income_statement=income_statement)
+
+
+@pytest.fixture
+def simple_dcf(company):
+    return SimpleDCF(change_in_nwc_to_change_in_sales=0.1,
+                     company=company,
+                     discount_rate=0.14,
+                     sales_growth=0.03,
+                     tax_rate=0.21,
+                     terminal_growth_rate=0.03,
+                     window=5)
