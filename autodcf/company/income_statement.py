@@ -5,14 +5,18 @@ class IncomeStatement:
                  sales,
                  cogs,
                  sga,
+                 rd,
                  depreciation,
                  amortization,
                  nonrecurring_cost,
+                 interest,
                  tax):
         self._sales = sales
         self._cogs = cogs
         self._sga = sga
+        self._rd = rd
         self._nonrecurring_cost = nonrecurring_cost
+        self._interest = interest
         self._tax = tax
         self._depreciation = depreciation
         self._amortization = amortization
@@ -72,3 +76,23 @@ class IncomeStatement:
     @amortization.setter
     def amortization(self, val):
         self._amortization = val
+
+    @property
+    def da(self):
+        return self.amortization + self.depreciation
+
+    @property
+    def rd(self):
+        return self._rd
+
+    @rd.setter
+    def rd(self, val):
+        self._rd = val
+
+    @property
+    def interest(self):
+        return self._interest
+
+    @interest.setter
+    def interest(self, val):
+        self._interest = val

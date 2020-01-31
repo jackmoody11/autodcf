@@ -1,12 +1,10 @@
-import pandas as pd
 from abc import ABC, abstractmethod
 
 
 class AbstractDCF(ABC):
     """Abstract base class for DCF models. """
 
-    def __init__(self):
-        pass
+    # Basic assumptions
 
     @property
     @abstractmethod
@@ -26,4 +24,9 @@ class AbstractDCF(ABC):
     @property
     @abstractmethod
     def terminal_growth_rate(self):
+        pass
+
+    @property
+    @abstractmethod
+    def window(self):
         pass
