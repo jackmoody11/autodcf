@@ -78,6 +78,10 @@ class IncomeStatement:
         self._amortization = val
 
     @property
+    def da(self):
+        return self.amortization + self.depreciation
+
+    @property
     def rd(self):
         return self._rd
 
