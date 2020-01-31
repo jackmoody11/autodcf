@@ -5,7 +5,8 @@ class SimpleDCF(DCF):
     """Creates simple DCF that uses past percentages to sales as baseline for future growth.
 
     Simplifying Assumptions:
-        - COGS, SGA, Depreciation, Amortization, Interest, and CapEx stay at constant % relative to sales
+        - COGS, SGA, Depreciation, Amortization, Interest,
+        and CapEx stay at constant % relative to sales
         - Change in net working capital / change in sales stays constant
         - Tax rate stays constant
     """
@@ -34,11 +35,11 @@ class SimpleDCF(DCF):
                          discount_rate=discount_rate,
                          terminal_growth_rate=terminal_growth_rate,
                          window=window,
-                         cogs_to_sales=company.income_statement.cogs / company.income_statement.sales,
-                         sga_to_sales=company.income_statement.sga / company.income_statement.sales,
-                         rd_to_sales=company.income_statement.rd / company.income_statement.sales,
-                         da_to_sales=company.income_statement.da / company.income_statement.sales,
+                         cogs_to_sales=company.income_statement.cogs / company.income_statement.sales,  # noqa:E501
+                         sga_to_sales=company.income_statement.sga / company.income_statement.sales,  # noqa:E501
+                         rd_to_sales=company.income_statement.rd / company.income_statement.sales,  # noqa:E501
+                         da_to_sales=company.income_statement.da / company.income_statement.sales,  # noqa:E501
                          interest_to_sales=company.income_statement.interest / company.income_statement.sales,
                          tax_rate=tax_rate,  # Needs value
                          capex_to_sales=company.cash_flows.capex / company.income_statement.sales,
-                         change_in_nwc_to_change_in_sales=change_in_nwc_to_change_in_sales)  # Needs value
+                         change_in_nwc_to_change_in_sales=change_in_nwc_to_change_in_sales)  # noqa:E501

@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from autodcf.models import DCF, SimpleDCF
+from autodcf.models import SimpleDCF
 
 
 @pytest.fixture
