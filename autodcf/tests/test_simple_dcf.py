@@ -18,8 +18,7 @@ class TestSimpleDCF:
     def test_window(self, simple_dcf):
         assert simple_dcf.window == 5
 
-    def test_get_sales(self, simple_dcf):
-        expected = np.array([73.5, 77.175, 81.03375, 85.0854375, 89.33970938, 93.80669484,
-                             98.49702959])
-        # assert (simple_dcf.get_sales() - expected < 1e-4).all()  # Test that sales numbers are close
-        pass
+    def test_forecast_sales(self, simple_dcf):
+        forecast = simple_dcf.forecast()
+        assert forecast.loc[-1, 'Sales'] == 100
+        assert forecast.loc[0, 'Sales'] == 100 * (1 + simple_dcf.sales_growth)

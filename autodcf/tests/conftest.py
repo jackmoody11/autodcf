@@ -4,31 +4,31 @@ from autodcf.company import BalanceSheet, CashFlows, IncomeStatement, Company
 from autodcf.models import SimpleDCF
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture
 def balance_sheet():
     return BalanceSheet(assets=100,
                         liabilities=50)
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture
 def cash_flows():
     return CashFlows(capex=3)
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture
 def income_statement():
     return IncomeStatement(sales=100,
                            cogs=50,
                            sga=25,
-                           rd=0,
+                           rd=2,
                            depreciation=4,
                            amortization=2,
-                           interest=0,
+                           interest=1,
                            nonrecurring_cost=3,
                            tax=4)
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture
 def company(balance_sheet, cash_flows, income_statement):
     return Company(fully_diluted_shares=10,
                    price_per_share=5.75,
