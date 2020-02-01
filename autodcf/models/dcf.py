@@ -82,30 +82,82 @@ class DCF(AbstractDCF):
         """Periods of normal sales growth until terminal growth rate takes over."""
         return self._window
 
+    @property
+    def cogs_to_sales(self):
+        return self._cogs_to_sales
+
+    @property
+    def sga_to_sales(self):
+        return self._sga_to_sales
+
+    @property
+    def rd_to_sales(self):
+        return self._rd_to_sales
+
+    @property
+    def da_to_sales(self):
+        return self._da_to_sales
+
+    @property
+    def interest_to_sales(self):
+        return self._interest_to_sales
+
+    @property
+    def tax_rate(self):
+        return self._tax_rate
+
+    @property
+    def capex_to_sales(self):
+        return self._capex_to_sales
+
+    @property
+    def change_in_nwc_to_change_in_sales(self):
+        return self._change_in_nwc_to_change_in_sales
+
     def forecast(self):
         """Get pandas dataframe with all info needed to complete forecast."""
         self._forecast.index = np.arange(-1, self.window + 1)
         self._forecast['Year'] = np.arange(datetime.now().year,
                                            datetime.now().year + self.window + 1)
-        self._forecast['Sales'] = fill_row(self.company.income_statement.sales, self._sales_growth)
-        self._forecast['COGS'] = multiply_by_sales_percent(self._forecast, self._cogs_to_sales)
+        self._forecast['Sales'] = fill_row(self.company.income_statement.sales, self.sales_growth)
+        self._forecast['COGS'] = multiply_by_sales_percent(self._forecast, self.cogs_to_sales)
         self._forecast['Gross Profit'] = self._forecast['Sales'] - self._forecast['COGS']
-        self._forecast['SG&A'] = multiply_by_sales_percent(self._forecast, self._cogs_to_sales)
+        self._forecast['SG&A'] = multiply_by_sales_percent(self._forecast, self.cogs_to_sales)
         self._forecast['Operating Profit'] = self._forecast['Gross Profit'] - self._forecast['SG&A']
-        self._forecast['R&D'] = multiply_by_sales_percent(self._forecast, self._rd_to_sales)
+        self._forecast['R&D'] = multiply_by_sales_percent(self._forecast, self.rd_to_sales)
         self._forecast['EBITDA'] = self._forecast['Operating Profit'] - self._forecast['R&D']
-        self._forecast['D&A'] = multiply_by_sales_percent(self._forecast, self._da_to_sales)
+        self._forecast['D&A'] = multiply_by_sales_percent(self._forecast, self.da_to_sales)
         self._forecast['EBIT'] = self._forecast['EBITDA'] - self._forecast['D&A']  # noqa:E501
         self._forecast['Interest'] = multiply_by_sales_percent(self._forecast,
-                                                               self._interest_to_sales)
+                                                               self.interest_to_sales)
         self._forecast['EBT'] = self._forecast['EBIT'] - self._forecast['Interest']
-        self._forecast['Taxes'] = self._forecast['EBT'] * self._tax_rate
+        self._forecast['Taxes'] = self._forecast['EBT'] * self.tax_rate
         self._forecast['Net Income'] = self._forecast['EBT'] - self._forecast['Taxes']
-        self._forecast['Capex'] = multiply_by_sales_percent(self._forecast, self._capex_to_sales)
+        self._forecast['Capex'] = multiply_by_sales_percent(self._forecast, self.capex_to_sales)
         # ΔSales * ΔNWC/ΔSales = ΔNWC
         change_in_sales = np.diff(self._forecast['Sales'])
-        self._forecast['Change in NWC'] = change_in_sales * self._change_in_nwc_to_change_in_sales
+        self._forecast['Change in NWC'] = change_in_sales * self.change_in_nwc_to_change_in_sales
         self._forecast['FCF'] = calculate_free_cash_flow(self._forecast)
         self._forecast['Discounted FCF'] = discount_cash_flows(self._forecast['FCF'],
-                                                               self._discount_rate)
+                                                               self.discount_rate)
         return self._forecast
+
+    @property
+    def value(self):
+        """Find value of """
+        return self.discounted_window_cash_flow + self.discounted_terminal_cash_flow
+
+    @property
+    def discounted_terminal_cash_flow(self):
+        """Sum of discounted cash flows after window."""
+        forecast = self.forecast()
+        last_fcf = forecast.loc['Discounted FCF', window]
+        tv_discounted_to_window = last_fcf * self.terminal_growth_rate / (
+                self.discount_rate - self.terminal_growth_rate)
+        return tv_discounted_to_window / (1 + self.discount_rate) ** self.window
+
+    @property
+    def discounted_window_cash_flow(self):
+        """Add up discounted cash flows from window."""
+        forecast = self.forecast()
+        return forecast.loc['Discounted FCF', 0:].sum()
