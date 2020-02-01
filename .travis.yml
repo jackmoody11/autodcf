@@ -14,7 +14,7 @@ matrix:
 
 install:
   - pip install -qq flake8
-  - pip install pytest coverage pytest-cov
+  - pip install pytest coverage pytest-cov codecov
   - if [[ $DOCBUILD ]]; then
     pip install doctr sphinx sphinx_rtd_theme ipython matplotlib;
     fi
