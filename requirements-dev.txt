@@ -2,3 +2,5 @@ pytest
 sphinx
 doctr
 flake8
+coverage
+pytest-cov

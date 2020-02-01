@@ -30,3 +30,5 @@ script:
       make -C docs html
       doctr deploy . --built-docs docs/build/html/
     fi
+after_success:
+  - codecov
