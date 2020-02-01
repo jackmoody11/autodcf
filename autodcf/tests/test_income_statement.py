@@ -65,3 +65,11 @@ class TestIncomeStatement:
     def test_set_amortization(self, income_statement):
         income_statement.amortization = 2.3
         assert income_statement.amortization == 2.3
+
+    def test_set_rd(self, income_statement):
+        income_statement.rd = 2000
+        assert income_statement.rd == 2000
+
+    def test_set_interest(self, income_statement):
+        income_statement.interest = 100
+        assert income_statement.interest == 100

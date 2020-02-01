@@ -34,3 +34,16 @@ class TestBalanceSheet:
     def test_debt_to_equity(self, balance_sheet):
         bs = BalanceSheet(assets=400, liabilities=300)
         assert bs.debt_to_equity == 3.0
+
+    def test_date(self, balance_sheet):
+        from datetime import datetime
+        assert balance_sheet.date is None
+        balance_sheet.date = datetime(2019, 1, 1)
+        assert balance_sheet.date.year == 2019
+        assert balance_sheet.date.month == 1
+        assert balance_sheet.date.day == 1
+
+    def test_set_date(self, balance_sheet):
+        from datetime import datetime
+        balance_sheet.date = datetime(2020, 1, 1)
+        assert balance_sheet.date == datetime(2020, 1, 1)
