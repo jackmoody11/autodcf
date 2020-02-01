@@ -1,5 +1,6 @@
 Auto DCF
 ========
+[![Build Status](https://travis-ci.com/jackmoody11/autodcf.svg?branch=master)](https://travis-ci.com/jackmoody11/autodcf)
 
 The autodcf package aims to make it extremely simple to create DCF models, simple and complex alike.
 If you are tired of running sensitivity tests to see how your model will behave with different sales growth patterns, this package is for you.
