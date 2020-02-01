@@ -24,7 +24,7 @@ script:
   - set -e
   - flake8 --version
   - flake8 autodcf
-  - pytest autodcf/tests
+  - pytest autodcf/tests --cov=autodcf
   - |
     if [[ $DOCBUILD ]]; then
       make -C docs html
