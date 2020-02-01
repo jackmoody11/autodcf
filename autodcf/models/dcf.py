@@ -151,9 +151,9 @@ class DCF(AbstractDCF):
     def discounted_terminal_cash_flow(self):
         """Sum of discounted cash flows after window."""
         forecast = self.forecast()
-        last_fcf = forecast.loc['Discounted FCF', window]
-        tv_discounted_to_window = last_fcf * self.terminal_growth_rate / (
-                self.discount_rate - self.terminal_growth_rate)
+        last_fcf = forecast.loc['Discounted FCF', self.window]
+        discount_minus_growth = (self.discount_rate - self.terminal_growth_rate)
+        tv_discounted_to_window = last_fcf * self.terminal_growth_rate / discount_minus_growth
         return tv_discounted_to_window / (1 + self.discount_rate) ** self.window
 
     @property
