@@ -1,0 +1,10 @@
+.. _whatsnew010:
+
+v0.1.0
+======
+
+Highlights
+~~~~~~~~~~
+
+* Add balance sheet, cash flow, income statement, company,
+  and simple DCF interfaces

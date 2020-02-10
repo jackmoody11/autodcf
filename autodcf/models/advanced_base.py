@@ -3,6 +3,7 @@ from autodcf.models.base import AbstractDCF
 
 
 class AbstractAdvancedDCF(AbstractDCF):
+    """Abstract base class from which more advanced DCFs are made."""
 
     # More complex ratios to use
 

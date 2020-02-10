@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 
 class AbstractDCF(ABC):
-    """Abstract base class for DCF models. """
+    """Abstract base class for all DCF models."""
 
     # Basic assumptions
 
