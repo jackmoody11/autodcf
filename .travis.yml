@@ -25,6 +25,15 @@ install:
     fi
   - python setup.py install
 
+# Only build docs if on master branch
+before_script:
+  - |
+    if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+      export DOCBUILD=true
+    else
+      export DOCBUILD=false
+    fi
+
 script:
   - set -e
   - flake8 --version
@@ -33,5 +42,5 @@ script:
   - |
     if [[ $DOCBUILD ]]; then
       make -C docs html
-      doctr deploy . --built-docs docs/_build/html/
+      doctr deploy . --built-docs docs/build/html/
     fi
