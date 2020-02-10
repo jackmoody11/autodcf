@@ -9,7 +9,6 @@ matrix:
       env: DOCBUILD=true  # Change this once documentation is ready
     - python: 3.7
       dist: xenial
-      sudo: true
     - python: 3.8
 
 env:
@@ -25,14 +24,6 @@ install:
     fi
   - python setup.py install
 
-# Only build docs if on master branch
-before_script:
-  - |
-    if [[ "$TRAVIS_BRANCH" == "master" ]]; then
-      export DOCBUILD=true
-    else
-      export DOCBUILD=false
-    fi
 
 script:
   - set -e
