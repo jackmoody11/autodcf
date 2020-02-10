@@ -2,7 +2,24 @@ from autodcf.company import BalanceSheet, CashFlows, IncomeStatement
 
 
 class Company:
-    """Encapsulates info about company's financial standing to be used in models."""
+    """Encapsulates info about company's financial standing to be used in models.
+
+    Args:
+        fully_diluted_shares (int): Number of total number of outstanding shares there
+            would be if all convertible securities were converted to common stock.
+        price_per_share (float): Current price per share of company stock.
+        balance_sheet (autodcf.company.BalanceSheet): Most recent balance sheet of company.
+        cash_flows (autodcf.company.CashFlows): Most recent cash flows of company.
+        income_statement (autodcf.company.IncomeStatement): Most recent income statement of company.
+
+    Attributes:
+        fully_diluted_shares (int): Number of total number of outstanding shares there
+            would be if all convertible securities were converted to common stock.
+        price_per_share (float): Current price per share of company stock.
+        balance_sheet (autodcf.company.BalanceSheet): Most recent balance sheet of company.
+        cash_flows (autodcf.company.CashFlows): Most recent cash flows of company.
+        income_statement (autodcf.company.IncomeStatement): Most recent income statement of company.
+    """
 
     def __init__(self,
                  fully_diluted_shares,

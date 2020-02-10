@@ -2,7 +2,20 @@ import datetime
 
 
 class BalanceSheet:
-    """Balance sheet for specific company at specific point in time. """
+    """Balance sheet for specific company at specific point in time.
+
+    Args:
+        assets (Union[int, float]): Total assets at date of filing.
+        liabilities (Union[int, float]): Total liabilities at date of filing.
+        date (datetime.datetime, optional): Date when balance sheet filed.
+
+    Attributes:
+        assets (Union[int, float]): Total assets at date of filing.
+        liabilities (Union[int, float]): Total liabilities at date of filing.
+        date (datetime.datetime, optional): Date when balance sheet filed.
+        equity (Union[int, float]): Total shareholder equity at date of filing.
+            Calculated by subtracting liabilities from assets.
+    """
 
     def __init__(self,
                  assets,
@@ -34,6 +47,7 @@ class BalanceSheet:
 
     @property
     def debt_to_equity(self):
+        """float: Ratio of total liabilities to shareholder equity."""
         return self.liabilities / self.equity
 
     @property

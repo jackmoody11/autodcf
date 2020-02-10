@@ -6,6 +6,32 @@ from datetime import datetime
 
 
 class DCF(AbstractDCF):
+    """Class for flexible DCF.
+
+    Note that all *_to_sales args take either an iterable or float. If given a float, the DCF will
+    use this constant across all time periods (ex: if given 0.45 for COGS, COGS will be 45% of sales
+    for all forecasted periods). If given iterable, the first value will be the value used for the first
+    year in the forecast and the last value will be the value used in the terminal year.
+
+    Args:
+        company (autodcf.company.Company): Company to do DCF analysis for.
+        sales_growth (Union[Iterable, float]): Iterable of sales growth numbers to iterate over or constant growth rate.
+            Values are in order, so first value in iterable applies to next sales period and
+            last value applies to last sales period in DCF. Note, if you want to have 5% sales growth, use 0.05.
+        discount_rate (float): Rate at which cash flow should be discounted.
+        terminal_growth_rate (float): Rate at which sales are estimated to grow after returning to normal profit levels.
+        window (int): Number of years until company returns to normal profit margins (terminal year).
+        cogs_to_sales (Union[Iterable, float]): COGS as % of sales.
+        sga_to_sales (Union[Iterable, float]): SGA as % of sales.
+        rd_to_sales (Union[Iterable, float]): R&D as % of sales.
+        da_to_sales (Union[Iterable, float]): Depreciation & amortization as % of sales. Assumes amortization is tax
+            deductible.
+        interest_to_sales (Union[Iterable, float]): Interest as % of sales.
+        tax_rate (float): Tax rate.
+        capex_to_sales (Union[Iterable, float]): Capex as % of sales.
+        change_in_nwc_to_change_in_sales (float): Ratio of how much net working capital must change to increase sales by
+            1 unit.
+    """
 
     def __init__(self,
                  company,
@@ -142,7 +168,7 @@ class DCF(AbstractDCF):
 
     @property
     def value(self):
-        """Find value of """
+        """Find value of discounted cash flows."""
         return self.discounted_window_cash_flow + self.discounted_terminal_cash_flow
 
     @property

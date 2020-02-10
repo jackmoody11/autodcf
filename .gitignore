@@ -11,3 +11,6 @@ venv/
 
 # Testing
 .coverage
+
+# Generated files to be excluded
+docs/build/

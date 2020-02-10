@@ -6,17 +6,22 @@ matrix:
   include:
     - python: 3.6
       dist: trusty
-    #      env: DOCBUILD=false  # Change this once documentation is ready
+      env: DOCBUILD=true  # Change this once documentation is ready
     - python: 3.7
       dist: xenial
       sudo: true
     - python: 3.8
 
+env:
+  global:
+    # Doctr deploy key for jackmoody11/autodcf
+    - secure: "0aXeGhVgbiBzytddjaojYr9I3HBfBOaDYrVNOIsYIShNUF0PhbIffhTFsMIKJY2jZ88tFiYTQbgVjcdfmCMbgz9e6MCsOFkIto9i+bjtTH3j2F+WT1GF/7fQgEUCRy4MB9vMw9G5FUh8JaAFS3+bNoeynCeJfottYcIPzY4wFe9HoCWKJggZOfGg1hpAJK71Y9Ji3Lw3LbY+6Y3/IZsOzJMGfVsCWYPhm5523b+qSDbLOUdQdW5w0uuoeWDRuAu2ddHxGa5H1PPAVtncA5/eZkxzPkX0MUm5dKa7l7niCm0nyBXEGalB8LeTa2VgvdtkEgDiaha3Iu6/Hr9+QV8GyW6qylVEsLFDuLrABW8ICHJOS6YUznqEprsQmUba0u+4NT97rvN3UN9dz8YgZIpyYv0bgY4bkXyDc2ks4KWvY8Hh2pSPJkL9WbTjHNscDvx1gkcV216ZYS4VsEybWWMJuW7bvUE/jUuaIZIIw9bMEUcp55Mrr3x/03oh1MchJ8ZwVgEkmtQTjvUWSufXze7U+AbSOB5Ghl3UxvQRmzd0E7HEi1wecsP3G/PmPwfPKCAa+1lZ2GCDTA4xvbXcR+847eZHVVHl6mKMWc159dt8k3RmYJVVryKymwJ087Zt96+bGQhKlQZiKf88OiCaiw9/cVHmGixlxM5AnL/8jN2DiSI="
+
+
 install:
-  - pip install -qq flake8
-  - pip install pytest
+  - pip install -qq flake8 pytest
   - if [[ $DOCBUILD ]]; then
-    pip install doctr sphinx sphinx_rtd_theme ipython matplotlib;
+    pip install doctr sphinx ipython sphinx_rtd_theme;
     fi
   - python setup.py install
 
@@ -28,5 +33,5 @@ script:
   - |
     if [[ $DOCBUILD ]]; then
       make -C docs html
-      doctr deploy . --built-docs docs/build/html/
+      doctr deploy . --built-docs docs/_build/html/
     fi

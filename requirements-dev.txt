@@ -2,3 +2,5 @@ pytest
 sphinx
 doctr
 flake8
+sphinx-autobuild
+sphinx_rtd_theme

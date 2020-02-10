@@ -1,5 +1,28 @@
 class IncomeStatement:
-    """Income statement object for specific company during a specific time period. """
+    """Income statement object for specific company during a specific time period.
+
+    Args:
+        sales (Union[float, int]): Sales from period.
+        cogs (Union[float, int]): Cost of goods sold from period.
+        sga (Union[float, int]): Selling, General, and Administrative costs from period.
+        rd (Union[float, int]): Research & Development costs from period.
+        depreciation (Union[float, int]): Depreciation from period.
+        amortization (Union[float, int]): Amortization from period.
+        nonrecurring_cost (Union[float, int]): Non-recurring cost from period.
+        interest (Union[float, int]): Interest expense from period.
+        tax (Union[float, int]): Tax (as absolute currency amount, NOT as tax rate %).
+
+    Attributes:
+        sales (Union[float, int]): Sales from period.
+        cogs (Union[float, int]): Cost of goods sold from period.
+        sga (Union[float, int]): Selling, General, and Administrative costs from period.
+        rd (Union[float, int]): Research & Development costs from period.
+        depreciation (Union[float, int]): Depreciation from period.
+        amortization (Union[float, int]): Amortization from period.
+        nonrecurring_cost (Union[float, int]): Non-recurring cost from period.
+        interest (Union[float, int]): Interest expense from period.
+        tax (Union[float, int]): Tax (as absolute currency amount, NOT as tax rate %).
+    """
 
     def __init__(self,
                  sales,
