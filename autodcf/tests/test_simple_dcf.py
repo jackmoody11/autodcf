@@ -1,7 +1,9 @@
 import numpy as np
+import pandas as pd
 import pytest
 
 from autodcf.models import SimpleDCF
+from autodcf.tests.utils import datapath
 
 
 class TestSimpleDCF:
@@ -22,3 +24,8 @@ class TestSimpleDCF:
         forecast = simple_dcf.forecast()
         assert forecast.loc[-1, 'Sales'] == 100
         assert forecast.loc[0, 'Sales'] == 100 * (1 + simple_dcf.sales_growth)
+
+    def test_simple_dcf_forecast(self, simple_dcf):
+        forecast = simple_dcf.forecast()
+        expected = pd.read_excel(datapath('simple_dcf.xlsx'), index_col=0, sheet_name='DCF')
+        pd.testing.assert_frame_equal(forecast, expected)

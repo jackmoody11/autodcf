@@ -64,7 +64,7 @@ setup(
         # project is installed.
         install_requires=parse_requirements('requirements.txt'),
         keywords=['DCF', 'Discounted Cash Flow', 'finance'],
-        tests_require=parse_requirements('requirements.txt'),
+        tests_require=parse_requirements('requirements.txt', 'requirements-dev.txt'),
         classifiers=[
             'Environment :: Console',
             'License :: OSI Approved :: Apache Software License',
