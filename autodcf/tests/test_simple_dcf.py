@@ -25,9 +25,8 @@ class TestSimpleDCF:
         assert forecast.loc[-1, 'Sales'] == 100
         assert forecast.loc[0, 'Sales'] == 100 * (1 + simple_dcf.sales_growth)
 
-    def test_total_discounted_value(self, simple_dcf):
+    def test_simple_dcf_forecast(self, simple_dcf):
         forecast = simple_dcf.forecast()
         expected = pd.read_excel(datapath('simple_dcf.xlsx'), index_col=0, sheet_name='DCF')
-        expected_columns = expected.columns
-        for column in expected_columns:
+        for column in expected.columns:
             assert np.allclose(expected[column].values, forecast[column].values, equal_nan=True)
