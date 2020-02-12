@@ -20,8 +20,7 @@ env:
 install:
   - pip install -qq -r requirements-dev.txt  # only includes requirements for
   - if [[ $DOCBUILD ]]; then
-    # install requirements for docs
-    pip install -qq sphinx-autobuild sphinx_rtd_theme sphinx doctr;
+    pip install -qq sphinx-autobuild sphinx_rtd_theme sphinx doctr;  # install requirements for docs
     fi
   - python setup.py install
 
