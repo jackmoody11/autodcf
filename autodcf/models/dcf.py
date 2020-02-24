@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from autodcf.models.base import AbstractDCF
+from autodcf.models._base import AbstractDCF
 from datetime import datetime
 
 
@@ -89,48 +89,69 @@ class DCF(AbstractDCF):
 
     @property
     def cogs_to_sales(self):
+        """Cost of goods sold as a percentage of sales."""
         return self._cogs_to_sales
 
     @property
     def sga_to_sales(self):
+        """Selling, general, and administrative costs as a percentage of sales."""
         return self._sga_to_sales
 
     @property
     def rd_to_sales(self):
+        """Research and development costs as a percentage of sales."""
         return self._rd_to_sales
 
     @property
     def da_to_sales(self):
+        """Depreciation and amortization as a percentage of sales."""
         return self._da_to_sales
 
     @property
     def interest_to_sales(self):
+        """Interest expense as a percentage of sales."""
         return self._interest_to_sales
 
     @property
     def tax_rate(self):
+        """Effective tax rate for company."""
         return self._tax_rate
 
     @property
     def capex_to_sales(self):
+        """Capital expenditures as a percentage of sales."""
         return self._capex_to_sales
 
     @property
     def change_in_nwc_to_change_in_sales(self):
+        """How much net working capital is expected to need to increase for each dollar increase in sales."""
         return self._change_in_nwc_to_change_in_sales
 
     def _calculate_sales(self):
-        """Get all values for stat given growth rate of initial period."""
+        """Calculate sales for window of growth.
+
+        Returns:
+            Numpy array with sales from each period in order.
+        """
         sales_growth = np.repeat(self.sales_growth, self.window + 1) if isinstance(self.sales_growth,
                                                                                    float) else self.sales_growth
         initial_sales = self.company.income_statement.sales
         return np.concatenate(([initial_sales], initial_sales * np.cumprod(1 + sales_growth)))
 
     def _multiply_by_sales_percent(self, percent_of_sales):
-        """Find values for stat in all periods given percent of sales stat accounts for."""
+        """Find values for stat in all periods given percent of sales stat accounts for.
+
+        Returns:
+            Pandas series with statistic multiplied by forecast Sales values.
+        """
         return self._forecast['Sales'] * percent_of_sales
 
     def _calculate_free_cash_flow(self):
+        """Calculate free cash flow for each period.
+
+        Returns:
+            Pandas Series with free cash flow for each period in forecast.
+        """
         return self._forecast['Net Income'] + self._forecast['D&A'] - self._forecast['Capex'] - self._forecast[
             'Change in NWC']
 
@@ -140,7 +161,12 @@ class DCF(AbstractDCF):
         return self._forecast.loc[0:, 'FCF'] * discount_factors
 
     def forecast(self):
-        """Get pandas dataframe with all info needed to complete forecast."""
+        """Get pandas dataframe with all info needed to complete forecast.
+
+        Returns:
+            forecast (pd.DataFrame): Pandas data frame with forecasted future income statements and discounted
+                free cash flows.
+        """
         self._forecast['Year'] = np.arange(datetime.now().year - 1, datetime.now().year + self.window + 1)
         self._forecast['Sales'] = self._calculate_sales()
         self._forecast['COGS'] = self._multiply_by_sales_percent(self.cogs_to_sales)
