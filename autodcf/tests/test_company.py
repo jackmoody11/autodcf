@@ -4,6 +4,12 @@ import pytest
 @pytest.fixture
 def replacement_balance_sheet():
     from autodcf.company import BalanceSheet
+    # Assets = 11,000
+    #   Current = 5,000
+    #   Long term = 6,000
+    # Liabilities = 5,000
+    #   Current = 4,000
+    #   Long term = 1,000
     return BalanceSheet(cash=1000,
                         short_term_investments=1000,
                         net_receivables=2000,
@@ -64,6 +70,10 @@ class TestCompany:
         company.balance_sheet = replacement_balance_sheet
         assert company.balance_sheet.assets == 11000
         assert company.balance_sheet.liabilities == 5000
+        assert company.balance_sheet.current_assets == 5000
+        assert company.balance_sheet.long_term_assets == 6000
+        assert company.balance_sheet.current_liabilites == 4000
+        assert company.balance_sheet.long_term_liabilities == 1000
 
         with pytest.raises(TypeError):
             company.balance_sheet = cash_flows
