@@ -192,8 +192,8 @@ class DCF(AbstractDCF):
         return self._forecast
 
     @property
-    def value(self):
-        """Find value of discounted cash flows."""
+    def enterprise_value(self):
+        """Enterprise value given by discounted cash flow analysis."""
         return self.discounted_window_cash_flow + self.discounted_terminal_cash_flow
 
     @property
