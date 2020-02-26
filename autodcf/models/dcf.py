@@ -197,6 +197,16 @@ class DCF(AbstractDCF):
         return self.discounted_window_cash_flow + self.discounted_terminal_cash_flow
 
     @property
+    def equity_value(self):
+        """Returns total equity value of firm."""
+        return self.enterprise_value - self.company.balance_sheet.net_debt
+
+    @property
+    def equity_value_per_share(self):
+        """Equity value divided by total number of shares outstanding."""
+        return self.equity_value / self.company.fully_diluted_shares
+
+    @property
     def discounted_terminal_cash_flow(self):
         """Sum of discounted cash flows after window."""
         f = self.forecast()
