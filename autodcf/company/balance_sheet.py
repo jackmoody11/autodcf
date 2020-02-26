@@ -225,8 +225,9 @@ class BalanceSheet:
     @property
     def net_debt(self):
         """Net debt (derived from short and long-term debt minus cash-like assets)."""
-        return (self.short_term_debt + self.long_term_debt + self.other_lt_liabilities *
-                self.other_lt_liability_debt_percent - self.cash - self.short_term_investments)
+        return (self.short_term_debt + self.long_term_debt
+                + self.other_lt_liabilities * self.other_lt_liability_debt_percent  # noqa: W503
+                - self.cash - self.short_term_investments)  # noqa: W503
 
     @property
     def equity(self):
