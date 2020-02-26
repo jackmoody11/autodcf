@@ -8,7 +8,7 @@ class SimpleDCF(DCF):
         - COGS, SGA, Depreciation, Amortization, Interest,
         and CapEx stay at constant % relative to sales
         - Change in net working capital / change in sales stays constant
-        - Tax rate stays constant
+        - Tax rate stays constant over entire period
 
     Args:
         company (autodcf.company.Company): Company to do DCF analysis for.
@@ -31,17 +31,6 @@ class SimpleDCF(DCF):
                  change_in_nwc_to_change_in_sales,
                  tax_rate,
                  window=5):
-        """
-
-        Args:
-            company (autodcf.company.Company): Company object that DCF is for.
-            sales_growth (Union[np.array, float, int]): Sales growth. If given iterable,
-                its length should be equal to the window size.
-            discount_rate (float): The discount rate for the model. Note that 0.1 = 10%.
-            terminal_growth_rate: The terminal growth rate for after window. Note that 0.1 = 10%.
-            window: Number of periods until terminal value.
-                Defaults to 5.
-        """
         super().__init__(company=company,
                          sales_growth=sales_growth,
                          discount_rate=discount_rate,
