@@ -8,7 +8,7 @@ from datetime import datetime
 class DCF(AbstractDCF):
     """Class for flexible DCF.
 
-    Note that all *_to_sales args take either an iterable or float. If given a float, the DCF will
+    Note that all _to_sales args take either an iterable or float. If given a float, the DCF will
     use this constant across all time periods (ex: if given 0.45 for COGS, COGS will be 45% of sales
     for all forecasted periods). If given iterable, the first value will be the value used for the first
     year in the forecast and the last value will be the value used in the terminal year.
