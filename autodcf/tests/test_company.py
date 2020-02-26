@@ -24,6 +24,7 @@ def replacement_balance_sheet():
                         short_term_debt=600,
                         current_part_lt_debt=400,
                         other_current_liabilities=1600,
+                        long_term_debt=0,
                         other_lt_liabilities=200,
                         deferred_lt_liabilities=300,
                         minority_interest=500)

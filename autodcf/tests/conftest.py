@@ -20,6 +20,7 @@ def balance_sheet():
             accrued_liabilities=9,
             short_term_debt=6,
             current_part_lt_debt=4,
+            long_term_debt=0,
             other_current_liabilities=16,
             other_lt_liabilities=2,
             deferred_lt_liabilities=3,
