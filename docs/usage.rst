@@ -58,6 +58,3 @@ or ``DCF``).
   forecast
   round(simple_dcf.enterprise_value, 2)
   round(simple_dcf.equity_value, 2)
-
-The code above will provide a filled out pandas DataFrame with estimated growth of different
-line items from the income statement.
