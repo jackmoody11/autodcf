@@ -213,6 +213,7 @@ class BalanceSheet:
     def long_term_liabilities(self):
         """Total amount of long-term liabilities at date of filing."""
         return sum((self.other_lt_liabilities,
+                    self.long_term_debt,
                     self.deferred_lt_liabilities,
                     self.minority_interest))
 
@@ -248,3 +249,7 @@ class BalanceSheet:
             self._date = val
         else:
             raise TypeError
+
+    @property
+    def other_lt_liability_debt_percent(self):
+        return self._other_lt_liability_debt_percent
