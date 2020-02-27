@@ -10,12 +10,28 @@ and ``IncomeStatement``. Once a ``Company`` object is created using the 3
 financial statements, this can be passed to one of the DCF models (currently either ``SimpleDCF``
 or ``DCF``).
 
-.. code:: python
+.. ipython:: python
 
   from autodcf.company import BalanceSheet, CashFlows, Company, IncomeStatement
   from autodcf.models import SimpleDCF
-
-  balance_sheet = BalanceSheet(assets=100, liabilities=50)
+  balance_sheet = BalanceSheet(cash=10,
+                               short_term_investments=5,
+                               net_receivables=10,
+                               inventory=5,
+                               other_current_assets=5,
+                               ppe=30,
+                               goodwill=10,
+                               intangible_assets=20,
+                               other_lt_assets=0,
+                               accounts_payable=5,
+                               accrued_liabilities=9,
+                               short_term_debt=6,
+                               current_part_lt_debt=4,
+                               long_term_debt=14,
+                               other_current_liabilities=2,
+                               other_lt_liabilities=2,
+                               deferred_lt_liabilities=3,
+                               minority_interest=5)
   cash_flows = CashFlows(capex=3)
   income_statement = IncomeStatement(sales=100,
                                      cogs=50,
@@ -39,6 +55,6 @@ or ``DCF``).
                          terminal_growth_rate=0.03,
                          window=5)
   forecast = simple_dcf.forecast()
-
-The code above will provide a filled out pandas DataFrame with estimated growth of different
-line items from the income statement.
+  forecast
+  round(simple_dcf.enterprise_value, 2)
+  round(simple_dcf.equity_value, 2)

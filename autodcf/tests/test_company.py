@@ -1,6 +1,35 @@
 import pytest
 
 
+@pytest.fixture
+def replacement_balance_sheet():
+    from autodcf.company import BalanceSheet
+    # Assets = 11,000
+    #   Current = 5,000
+    #   Long term = 6,000
+    # Liabilities = 5,000
+    #   Current = 4,000
+    #   Long term = 1,000
+    return BalanceSheet(cash=1000,
+                        short_term_investments=1000,
+                        net_receivables=2000,
+                        inventory=500,
+                        other_current_assets=500,
+                        ppe=3000,
+                        goodwill=1000,
+                        intangible_assets=2000,
+                        other_lt_assets=0,
+                        accounts_payable=500,
+                        accrued_liabilities=900,
+                        short_term_debt=600,
+                        current_part_lt_debt=400,
+                        other_current_liabilities=1600,
+                        long_term_debt=0,
+                        other_lt_liabilities=200,
+                        deferred_lt_liabilities=300,
+                        minority_interest=500)
+
+
 class TestCompany:
     def test_fully_diluted_shares(self, company):
         assert company.fully_diluted_shares == 10
@@ -38,12 +67,14 @@ class TestCompany:
         company.fully_diluted_shares = 1000
         assert company.fully_diluted_shares == 1000
 
-    def test_set_balance_sheet(self, company, cash_flows, income_statement):
-        from autodcf.company import BalanceSheet
-        new_balance_sheet = BalanceSheet(assets=2000, liabilities=1500)
-        company.balance_sheet = new_balance_sheet
-        assert company.balance_sheet.assets == 2000
-        assert company.balance_sheet.liabilities == 1500
+    def test_set_balance_sheet(self, company, cash_flows, income_statement, replacement_balance_sheet):
+        company.balance_sheet = replacement_balance_sheet
+        assert company.balance_sheet.assets == 11000
+        assert company.balance_sheet.liabilities == 5000
+        assert company.balance_sheet.current_assets == 5000
+        assert company.balance_sheet.long_term_assets == 6000
+        assert company.balance_sheet.current_liabilites == 4000
+        assert company.balance_sheet.long_term_liabilities == 1000
 
         with pytest.raises(TypeError):
             company.balance_sheet = cash_flows

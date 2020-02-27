@@ -6,8 +6,25 @@ from autodcf.models import SimpleDCF
 
 @pytest.fixture
 def balance_sheet():
-    return BalanceSheet(assets=100,
-                        liabilities=50)
+    return BalanceSheet(
+            cash=10,
+            short_term_investments=10,
+            net_receivables=10,
+            inventory=5,
+            other_current_assets=5,
+            ppe=30,
+            goodwill=10,
+            intangible_assets=20,
+            other_lt_assets=0,
+            accounts_payable=5,
+            accrued_liabilities=9,
+            short_term_debt=6,
+            current_part_lt_debt=4,
+            long_term_debt=14,
+            other_current_liabilities=2,
+            other_lt_liabilities=2,
+            deferred_lt_liabilities=3,
+            minority_interest=5)
 
 
 @pytest.fixture
