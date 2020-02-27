@@ -14,3 +14,4 @@ using a few items:
 - Income Statement
 
 .. autoclass:: autodcf.company.Company
+   :members:

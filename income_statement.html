@@ -171,7 +171,7 @@
 information about a company’s income statement for a specific time period.</p>
 <dl class="class">
 <dt id="autodcf.company.IncomeStatement">
-<em class="property">class </em><code class="sig-prename descclassname">autodcf.company.</code><code class="sig-name descname">IncomeStatement</code><span class="sig-paren">(</span><em class="sig-param">sales</em>, <em class="sig-param">cogs</em>, <em class="sig-param">sga</em>, <em class="sig-param">rd</em>, <em class="sig-param">depreciation</em>, <em class="sig-param">amortization</em>, <em class="sig-param">nonrecurring_cost</em>, <em class="sig-param">interest</em>, <em class="sig-param">tax</em><span class="sig-paren">)</span><a class="headerlink" href="#autodcf.company.IncomeStatement" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">autodcf.company.</code><code class="sig-name descname">IncomeStatement</code><span class="sig-paren">(</span><em class="sig-param">sales</em>, <em class="sig-param">cogs</em>, <em class="sig-param">sga</em>, <em class="sig-param">rd</em>, <em class="sig-param">depreciation</em>, <em class="sig-param">amortization</em>, <em class="sig-param">nonrecurring_cost</em>, <em class="sig-param">interest</em>, <em class="sig-param">tax</em>, <em class="sig-param">start_date=datetime.datetime(2019</em>, <em class="sig-param">2</em>, <em class="sig-param">27</em>, <em class="sig-param">2</em>, <em class="sig-param">22</em>, <em class="sig-param">6</em>, <em class="sig-param">243994)</em>, <em class="sig-param">end_date=datetime.datetime(2020</em>, <em class="sig-param">2</em>, <em class="sig-param">27</em>, <em class="sig-param">2</em>, <em class="sig-param">22</em>, <em class="sig-param">6</em>, <em class="sig-param">244002)</em><span class="sig-paren">)</span><a class="headerlink" href="#autodcf.company.IncomeStatement" title="Permalink to this definition">¶</a></dt>
 <dd><p>Income statement object for specific company during a specific time period.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -185,106 +185,81 @@ information about a company’s income statement for a specific time period.</p>
 <li><p><strong>nonrecurring_cost</strong> (<em>Union</em><em>[</em><em>float</em><em>, </em><em>int</em><em>]</em>) – Non-recurring cost from period.</p></li>
 <li><p><strong>interest</strong> (<em>Union</em><em>[</em><em>float</em><em>, </em><em>int</em><em>]</em>) – Interest expense from period.</p></li>
 <li><p><strong>tax</strong> (<em>Union</em><em>[</em><em>float</em><em>, </em><em>int</em><em>]</em>) – Tax (as absolute currency amount, NOT as tax rate %).</p></li>
+<li><p><strong>start_date</strong> (<em>datetime.datetime</em>) – First day of period for income statement.</p></li>
+<li><p><strong>end_date</strong> (<em>datetime.datetime</em>) – Last day of period for income statement.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
-<dt id="autodcf.company.IncomeStatement.sales">
-<code class="sig-name descname">sales</code><a class="headerlink" href="#autodcf.company.IncomeStatement.sales" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sales from period.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Union[float, int]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="autodcf.company.IncomeStatement.cogs">
-<code class="sig-name descname">cogs</code><a class="headerlink" href="#autodcf.company.IncomeStatement.cogs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cost of goods sold from period.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Union[float, int]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="autodcf.company.IncomeStatement.sga">
-<code class="sig-name descname">sga</code><a class="headerlink" href="#autodcf.company.IncomeStatement.sga" title="Permalink to this definition">¶</a></dt>
-<dd><p>Selling, General, and Administrative costs from period.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Union[float, int]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="autodcf.company.IncomeStatement.rd">
-<code class="sig-name descname">rd</code><a class="headerlink" href="#autodcf.company.IncomeStatement.rd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Research &amp; Development costs from period.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Union[float, int]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="autodcf.company.IncomeStatement.depreciation">
-<code class="sig-name descname">depreciation</code><a class="headerlink" href="#autodcf.company.IncomeStatement.depreciation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Depreciation from period.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Union[float, int]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="attribute">
+<dl class="method">
 <dt id="autodcf.company.IncomeStatement.amortization">
-<code class="sig-name descname">amortization</code><a class="headerlink" href="#autodcf.company.IncomeStatement.amortization" title="Permalink to this definition">¶</a></dt>
-<dd><p>Amortization from period.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Union[float, int]</p>
-</dd>
-</dl>
+<em class="property">property </em><code class="sig-name descname">amortization</code><a class="headerlink" href="#autodcf.company.IncomeStatement.amortization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total amortization from period.</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="autodcf.company.IncomeStatement.nonrecurring_cost">
-<code class="sig-name descname">nonrecurring_cost</code><a class="headerlink" href="#autodcf.company.IncomeStatement.nonrecurring_cost" title="Permalink to this definition">¶</a></dt>
-<dd><p>Non-recurring cost from period.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Union[float, int]</p>
-</dd>
-</dl>
+<dl class="method">
+<dt id="autodcf.company.IncomeStatement.cogs">
+<em class="property">property </em><code class="sig-name descname">cogs</code><a class="headerlink" href="#autodcf.company.IncomeStatement.cogs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cost of goods sold from period.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
+<dt id="autodcf.company.IncomeStatement.da">
+<em class="property">property </em><code class="sig-name descname">da</code><a class="headerlink" href="#autodcf.company.IncomeStatement.da" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total depreciation plus amortization from period.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.IncomeStatement.depreciation">
+<em class="property">property </em><code class="sig-name descname">depreciation</code><a class="headerlink" href="#autodcf.company.IncomeStatement.depreciation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total depreciation from period.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.IncomeStatement.end_date">
+<em class="property">property </em><code class="sig-name descname">end_date</code><a class="headerlink" href="#autodcf.company.IncomeStatement.end_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>End date of period. Defaults to today.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="autodcf.company.IncomeStatement.interest">
-<code class="sig-name descname">interest</code><a class="headerlink" href="#autodcf.company.IncomeStatement.interest" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">interest</code><a class="headerlink" href="#autodcf.company.IncomeStatement.interest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interest expense from period.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Union[float, int]</p>
-</dd>
-</dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
+<dt id="autodcf.company.IncomeStatement.nonrecurring_cost">
+<em class="property">property </em><code class="sig-name descname">nonrecurring_cost</code><a class="headerlink" href="#autodcf.company.IncomeStatement.nonrecurring_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Non-recurring costs from period.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.IncomeStatement.rd">
+<em class="property">property </em><code class="sig-name descname">rd</code><a class="headerlink" href="#autodcf.company.IncomeStatement.rd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Research and development costs from period.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.IncomeStatement.sales">
+<em class="property">property </em><code class="sig-name descname">sales</code><a class="headerlink" href="#autodcf.company.IncomeStatement.sales" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sales from period.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.IncomeStatement.sga">
+<em class="property">property </em><code class="sig-name descname">sga</code><a class="headerlink" href="#autodcf.company.IncomeStatement.sga" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selling, general, and administrative costs from period.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.IncomeStatement.start_date">
+<em class="property">property </em><code class="sig-name descname">start_date</code><a class="headerlink" href="#autodcf.company.IncomeStatement.start_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start date of period. Defaults to one year from today.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="autodcf.company.IncomeStatement.tax">
-<code class="sig-name descname">tax</code><a class="headerlink" href="#autodcf.company.IncomeStatement.tax" title="Permalink to this definition">¶</a></dt>
-<dd><p>Tax (as absolute currency amount, NOT as tax rate %).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Union[float, int]</p>
-</dd>
-</dl>
+<em class="property">property </em><code class="sig-name descname">tax</code><a class="headerlink" href="#autodcf.company.IncomeStatement.tax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total taxes from period.</p>
 </dd></dl>
 
 </dd></dl>

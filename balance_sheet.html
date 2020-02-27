@@ -171,60 +171,212 @@
 information about a company’s balance sheet at a specific time.</p>
 <dl class="class">
 <dt id="autodcf.company.BalanceSheet">
-<em class="property">class </em><code class="sig-prename descclassname">autodcf.company.</code><code class="sig-name descname">BalanceSheet</code><span class="sig-paren">(</span><em class="sig-param">assets</em>, <em class="sig-param">liabilities</em>, <em class="sig-param">date=None</em><span class="sig-paren">)</span><a class="headerlink" href="#autodcf.company.BalanceSheet" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">autodcf.company.</code><code class="sig-name descname">BalanceSheet</code><span class="sig-paren">(</span><em class="sig-param">cash</em>, <em class="sig-param">short_term_investments</em>, <em class="sig-param">net_receivables</em>, <em class="sig-param">inventory</em>, <em class="sig-param">other_current_assets</em>, <em class="sig-param">ppe</em>, <em class="sig-param">goodwill</em>, <em class="sig-param">intangible_assets</em>, <em class="sig-param">other_lt_assets</em>, <em class="sig-param">accounts_payable</em>, <em class="sig-param">accrued_liabilities</em>, <em class="sig-param">short_term_debt</em>, <em class="sig-param">current_part_lt_debt</em>, <em class="sig-param">long_term_debt</em>, <em class="sig-param">other_current_liabilities</em>, <em class="sig-param">other_lt_liabilities</em>, <em class="sig-param">deferred_lt_liabilities</em>, <em class="sig-param">minority_interest</em>, <em class="sig-param">date=None</em>, <em class="sig-param">other_lt_liability_debt_percent=0</em><span class="sig-paren">)</span><a class="headerlink" href="#autodcf.company.BalanceSheet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Balance sheet for specific company at specific point in time.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>assets</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><em>float</em><em>]</em>) – Total assets at date of filing.</p></li>
-<li><p><strong>liabilities</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><em>float</em><em>]</em>) – Total liabilities at date of filing.</p></li>
-<li><p><strong>date</strong> (<em>datetime.datetime</em><em>, </em><em>optional</em>) – Date when balance sheet filed.</p></li>
+<li><p><strong>cash</strong> (<em>float</em>) – Cash from balance sheet.</p></li>
+<li><p><strong>short_term_investments</strong> (<em>float</em>) – Short term investments from balance sheet.</p></li>
+<li><p><strong>net_receivables</strong> (<em>float</em>) – Net receivables from balance sheet.</p></li>
+<li><p><strong>inventory</strong> (<em>float</em>) – Inventory from balance sheet.</p></li>
+<li><p><strong>other_current_assets</strong> (<em>float</em>) – Other current assets not described by those above.</p></li>
+<li><p><strong>ppe</strong> (<em>float</em>) – Plant, property, and equipment value from balance sheet.</p></li>
+<li><p><strong>goodwill</strong> (<em>float</em>) – Value of goodwill from balance sheet.</p></li>
+<li><p><strong>intangible_assets</strong> (<em>float</em>) – Value of intangible assets.</p></li>
+<li><p><strong>other_lt_assets</strong> (<em>float</em>) – Value of any other long-term assets not included in ppe,
+goodwill, and intangible assets.</p></li>
+<li><p><strong>accounts_payable</strong> (<em>float</em>) – Accounts payable from balance sheet.</p></li>
+<li><p><strong>accrued_liabilities</strong> (<em>float</em>) – Accrued liabilities from balance sheet.</p></li>
+<li><p><strong>short_term_debt</strong> (<em>float</em>) – Short term debt from balance sheet.</p></li>
+<li><p><strong>current_part_lt_debt</strong> (<em>float</em>) – Current part long-term debt from balance sheet.</p></li>
+<li><p><strong>other_current_liabilities</strong> (<em>float</em>) – Any other current liabilities not covered by accounts payable,
+accrued liabilities, short term debt, or current part long-term debt.</p></li>
+<li><p><strong>long_term_debt</strong> (<em>float</em>) – long-term debt.</p></li>
+<li><p><strong>other_lt_liabilities</strong> (<em>float</em>) – Any long-term liabilities that are not deferred or minority interest.</p></li>
+<li><p><strong>deferred_lt_liabilities</strong> (<em>float</em>) – Deferred long-term liabilities from balance sheet.</p></li>
+<li><p><strong>minority_interest</strong> (<em>float</em>) – Minority interest from balance sheet.</p></li>
+<li><p><strong>date</strong> (<em>datetime.datetime</em><em>, </em><em>optional</em>) – Date balance sheet was released.</p></li>
+<li><p><strong>other_lt_liability_debt_percent</strong> (<em>float</em><em>, </em><em>optional</em>) – Percent of long-term liabilities that are long-term debt.
+Should be between 0 and 1 inclusive. Defaults to 0.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.accounts_payable">
+<em class="property">property </em><code class="sig-name descname">accounts_payable</code><a class="headerlink" href="#autodcf.company.BalanceSheet.accounts_payable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Amount of accounts payable at date of filing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.accrued_liabilities">
+<em class="property">property </em><code class="sig-name descname">accrued_liabilities</code><a class="headerlink" href="#autodcf.company.BalanceSheet.accrued_liabilities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Amount of accrued liabilities at date of filing.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="autodcf.company.BalanceSheet.assets">
-<code class="sig-name descname">assets</code><a class="headerlink" href="#autodcf.company.BalanceSheet.assets" title="Permalink to this definition">¶</a></dt>
-<dd><p>Total assets at date of filing.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Union[int, float]</p>
-</dd>
-</dl>
+<em class="property">property </em><code class="sig-name descname">assets</code><a class="headerlink" href="#autodcf.company.BalanceSheet.assets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total value of assets at date of filing.</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="autodcf.company.BalanceSheet.liabilities">
-<code class="sig-name descname">liabilities</code><a class="headerlink" href="#autodcf.company.BalanceSheet.liabilities" title="Permalink to this definition">¶</a></dt>
-<dd><p>Total liabilities at date of filing.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Union[int, float]</p>
-</dd>
-</dl>
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.cash">
+<em class="property">property </em><code class="sig-name descname">cash</code><a class="headerlink" href="#autodcf.company.BalanceSheet.cash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cash available at date of filing.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.current_assets">
+<em class="property">property </em><code class="sig-name descname">current_assets</code><a class="headerlink" href="#autodcf.company.BalanceSheet.current_assets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total value of current assets at date of filing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.current_liabilites">
+<em class="property">property </em><code class="sig-name descname">current_liabilites</code><a class="headerlink" href="#autodcf.company.BalanceSheet.current_liabilites" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total amount of current liabilities at date of filing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.current_part_lt_debt">
+<em class="property">property </em><code class="sig-name descname">current_part_lt_debt</code><a class="headerlink" href="#autodcf.company.BalanceSheet.current_part_lt_debt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Amount of long-term debt that is due soon at date of filing.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="autodcf.company.BalanceSheet.date">
-<code class="sig-name descname">date</code><a class="headerlink" href="#autodcf.company.BalanceSheet.date" title="Permalink to this definition">¶</a></dt>
-<dd><p>Date when balance sheet filed.</p>
+<em class="property">property </em><code class="sig-name descname">date</code><a class="headerlink" href="#autodcf.company.BalanceSheet.date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Date of filing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.debt_to_equity">
+<em class="property">property </em><code class="sig-name descname">debt_to_equity</code><a class="headerlink" href="#autodcf.company.BalanceSheet.debt_to_equity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ratio of total liabilities to shareholder equity.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>datetime.datetime, optional</p>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.deferred_lt_liabilities">
+<em class="property">property </em><code class="sig-name descname">deferred_lt_liabilities</code><a class="headerlink" href="#autodcf.company.BalanceSheet.deferred_lt_liabilities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deferred long-term liabilities at date of filing.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="autodcf.company.BalanceSheet.equity">
-<code class="sig-name descname">equity</code><a class="headerlink" href="#autodcf.company.BalanceSheet.equity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Total shareholder equity at date of filing.
-Calculated by subtracting liabilities from assets.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Union[int, float]</p>
-</dd>
-</dl>
+<em class="property">property </em><code class="sig-name descname">equity</code><a class="headerlink" href="#autodcf.company.BalanceSheet.equity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total assets minus total liabilities at date of filing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.goodwill">
+<em class="property">property </em><code class="sig-name descname">goodwill</code><a class="headerlink" href="#autodcf.company.BalanceSheet.goodwill" title="Permalink to this definition">¶</a></dt>
+<dd><p>Value of goodwill at date of filing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.intangible_assets">
+<em class="property">property </em><code class="sig-name descname">intangible_assets</code><a class="headerlink" href="#autodcf.company.BalanceSheet.intangible_assets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Value of intangible assets at date of filing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.inventory">
+<em class="property">property </em><code class="sig-name descname">inventory</code><a class="headerlink" href="#autodcf.company.BalanceSheet.inventory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Value of inventory at date of filing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.liabilities">
+<em class="property">property </em><code class="sig-name descname">liabilities</code><a class="headerlink" href="#autodcf.company.BalanceSheet.liabilities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total amount of liabilities at date of filing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.long_term_assets">
+<em class="property">property </em><code class="sig-name descname">long_term_assets</code><a class="headerlink" href="#autodcf.company.BalanceSheet.long_term_assets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total value of long-term assets at date of filing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.long_term_debt">
+<em class="property">property </em><code class="sig-name descname">long_term_debt</code><a class="headerlink" href="#autodcf.company.BalanceSheet.long_term_debt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Amount of long-term debt not due currently at date of filing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.long_term_liabilities">
+<em class="property">property </em><code class="sig-name descname">long_term_liabilities</code><a class="headerlink" href="#autodcf.company.BalanceSheet.long_term_liabilities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total amount of long-term liabilities at date of filing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.minority_interest">
+<em class="property">property </em><code class="sig-name descname">minority_interest</code><a class="headerlink" href="#autodcf.company.BalanceSheet.minority_interest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minority interest at date of filing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.net_debt">
+<em class="property">property </em><code class="sig-name descname">net_debt</code><a class="headerlink" href="#autodcf.company.BalanceSheet.net_debt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Net debt (derived from short and long-term debt minus cash-like assets).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.net_receivables">
+<em class="property">property </em><code class="sig-name descname">net_receivables</code><a class="headerlink" href="#autodcf.company.BalanceSheet.net_receivables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Net receivables at date of filing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.other_current_assets">
+<em class="property">property </em><code class="sig-name descname">other_current_assets</code><a class="headerlink" href="#autodcf.company.BalanceSheet.other_current_assets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Other current assets not included in cash, short term investments, net receivables, and inventory.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.other_current_liabilities">
+<em class="property">property </em><code class="sig-name descname">other_current_liabilities</code><a class="headerlink" href="#autodcf.company.BalanceSheet.other_current_liabilities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Other current liabilities.</p>
+<p>All other current liabilities not included in accounts payable, accrued liabilities, short term debt,
+and current part long-term debt.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.other_lt_assets">
+<em class="property">property </em><code class="sig-name descname">other_lt_assets</code><a class="headerlink" href="#autodcf.company.BalanceSheet.other_lt_assets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Other long-term assets not included in PPE, goodwill, and intangible assets.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.other_lt_liabilities">
+<em class="property">property </em><code class="sig-name descname">other_lt_liabilities</code><a class="headerlink" href="#autodcf.company.BalanceSheet.other_lt_liabilities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Other long-term liabilities.</p>
+<p>All other long-term liabilities not included in long-term debt, deferred long-term liabilities and
+minority interest.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.ppe">
+<em class="property">property </em><code class="sig-name descname">ppe</code><a class="headerlink" href="#autodcf.company.BalanceSheet.ppe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Value of plant, property, and equipment at date of filing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.short_term_debt">
+<em class="property">property </em><code class="sig-name descname">short_term_debt</code><a class="headerlink" href="#autodcf.company.BalanceSheet.short_term_debt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Amount of short term debt at date of filing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.company.BalanceSheet.short_term_investments">
+<em class="property">property </em><code class="sig-name descname">short_term_investments</code><a class="headerlink" href="#autodcf.company.BalanceSheet.short_term_investments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Short term investments at date of filing.</p>
 </dd></dl>
 
 </dd></dl>

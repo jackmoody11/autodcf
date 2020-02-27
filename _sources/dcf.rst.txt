@@ -8,3 +8,4 @@ that allows users to easily make complex assumptions about sales growth,
 and relation of line items (e.g. R&D, Capex, COGS) to sales.
 
 .. autoclass:: autodcf.models.DCF
+   :members:

@@ -172,37 +172,81 @@ The <code class="docutils literal notranslate"><span class="pre">Company</span><
 and <code class="docutils literal notranslate"><span class="pre">IncomeStatement</span></code>. Once a <code class="docutils literal notranslate"><span class="pre">Company</span></code> object is created using the 3
 financial statements, this can be passed to one of the DCF models (currently either <code class="docutils literal notranslate"><span class="pre">SimpleDCF</span></code>
 or <code class="docutils literal notranslate"><span class="pre">DCF</span></code>).</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">autodcf.company</span> <span class="kn">import</span> <span class="n">BalanceSheet</span><span class="p">,</span> <span class="n">CashFlows</span><span class="p">,</span> <span class="n">Company</span><span class="p">,</span> <span class="n">IncomeStatement</span>
-<span class="kn">from</span> <span class="nn">autodcf.models</span> <span class="kn">import</span> <span class="n">SimpleDCF</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">autodcf.company</span> <span class="kn">import</span> <span class="n">BalanceSheet</span><span class="p">,</span> <span class="n">CashFlows</span><span class="p">,</span> <span class="n">Company</span><span class="p">,</span> <span class="n">IncomeStatement</span>
 
-<span class="n">balance_sheet</span> <span class="o">=</span> <span class="n">BalanceSheet</span><span class="p">(</span><span class="n">assets</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">liabilities</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
-<span class="n">cash_flows</span> <span class="o">=</span> <span class="n">CashFlows</span><span class="p">(</span><span class="n">capex</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">income_statement</span> <span class="o">=</span> <span class="n">IncomeStatement</span><span class="p">(</span><span class="n">sales</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-                                   <span class="n">cogs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
-                                   <span class="n">sga</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
-                                   <span class="n">rd</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                                   <span class="n">depreciation</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-                                   <span class="n">amortization</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-                                   <span class="n">interest</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                                   <span class="n">nonrecurring_cost</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-                                   <span class="n">tax</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">company</span> <span class="o">=</span> <span class="n">Company</span><span class="p">(</span><span class="n">balance_sheet</span><span class="o">=</span><span class="n">balance_sheet</span><span class="p">,</span>
-                  <span class="n">cash_flows</span><span class="o">=</span><span class="n">cash_flows</span><span class="p">,</span>
-                  <span class="n">income_statement</span><span class="o">=</span><span class="n">income_statement</span><span class="p">,</span>
-                  <span class="n">price_per_share</span><span class="o">=</span><span class="mf">2.00</span><span class="p">,</span>
-                  <span class="n">fully_diluted_shares</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">simple_dcf</span> <span class="o">=</span> <span class="n">SimpleDCF</span><span class="p">(</span><span class="n">change_in_nwc_to_change_in_sales</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-                       <span class="n">company</span><span class="o">=</span><span class="n">company</span><span class="p">,</span>
-                       <span class="n">discount_rate</span><span class="o">=</span><span class="mf">0.14</span><span class="p">,</span>
-                       <span class="n">sales_growth</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span>
-                       <span class="n">tax_rate</span><span class="o">=</span><span class="mf">0.21</span><span class="p">,</span>
-                       <span class="n">terminal_growth_rate</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span>
-                       <span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">forecast</span> <span class="o">=</span> <span class="n">simple_dcf</span><span class="o">.</span><span class="n">forecast</span><span class="p">()</span>
+<span class="gp">In [2]: </span><span class="kn">from</span> <span class="nn">autodcf.models</span> <span class="kn">import</span> <span class="n">SimpleDCF</span>
+
+<span class="gp">In [3]: </span><span class="n">balance_sheet</span> <span class="o">=</span> <span class="n">BalanceSheet</span><span class="p">(</span><span class="n">cash</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="gp">   ...: </span>                             <span class="n">short_term_investments</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="gp">   ...: </span>                             <span class="n">net_receivables</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="gp">   ...: </span>                             <span class="n">inventory</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="gp">   ...: </span>                             <span class="n">other_current_assets</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="gp">   ...: </span>                             <span class="n">ppe</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+<span class="gp">   ...: </span>                             <span class="n">goodwill</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="gp">   ...: </span>                             <span class="n">intangible_assets</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+<span class="gp">   ...: </span>                             <span class="n">other_lt_assets</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="gp">   ...: </span>                             <span class="n">accounts_payable</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="gp">   ...: </span>                             <span class="n">accrued_liabilities</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+<span class="gp">   ...: </span>                             <span class="n">short_term_debt</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+<span class="gp">   ...: </span>                             <span class="n">current_part_lt_debt</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+<span class="gp">   ...: </span>                             <span class="n">long_term_debt</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+<span class="gp">   ...: </span>                             <span class="n">other_current_liabilities</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">   ...: </span>                             <span class="n">other_lt_liabilities</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">   ...: </span>                             <span class="n">deferred_lt_liabilities</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="gp">   ...: </span>                             <span class="n">minority_interest</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [4]: </span><span class="n">cash_flows</span> <span class="o">=</span> <span class="n">CashFlows</span><span class="p">(</span><span class="n">capex</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="gp">In [5]: </span><span class="n">income_statement</span> <span class="o">=</span> <span class="n">IncomeStatement</span><span class="p">(</span><span class="n">sales</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+<span class="gp">   ...: </span>                                   <span class="n">cogs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+<span class="gp">   ...: </span>                                   <span class="n">sga</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
+<span class="gp">   ...: </span>                                   <span class="n">rd</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="gp">   ...: </span>                                   <span class="n">depreciation</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+<span class="gp">   ...: </span>                                   <span class="n">amortization</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">   ...: </span>                                   <span class="n">interest</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="gp">   ...: </span>                                   <span class="n">nonrecurring_cost</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="gp">   ...: </span>                                   <span class="n">tax</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [6]: </span><span class="n">company</span> <span class="o">=</span> <span class="n">Company</span><span class="p">(</span><span class="n">balance_sheet</span><span class="o">=</span><span class="n">balance_sheet</span><span class="p">,</span>
+<span class="gp">   ...: </span>                  <span class="n">cash_flows</span><span class="o">=</span><span class="n">cash_flows</span><span class="p">,</span>
+<span class="gp">   ...: </span>                  <span class="n">income_statement</span><span class="o">=</span><span class="n">income_statement</span><span class="p">,</span>
+<span class="gp">   ...: </span>                  <span class="n">price_per_share</span><span class="o">=</span><span class="mf">2.00</span><span class="p">,</span>
+<span class="gp">   ...: </span>                  <span class="n">fully_diluted_shares</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [7]: </span><span class="n">simple_dcf</span> <span class="o">=</span> <span class="n">SimpleDCF</span><span class="p">(</span><span class="n">change_in_nwc_to_change_in_sales</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+<span class="gp">   ...: </span>                       <span class="n">company</span><span class="o">=</span><span class="n">company</span><span class="p">,</span>
+<span class="gp">   ...: </span>                       <span class="n">discount_rate</span><span class="o">=</span><span class="mf">0.14</span><span class="p">,</span>
+<span class="gp">   ...: </span>                       <span class="n">sales_growth</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span>
+<span class="gp">   ...: </span>                       <span class="n">tax_rate</span><span class="o">=</span><span class="mf">0.21</span><span class="p">,</span>
+<span class="gp">   ...: </span>                       <span class="n">terminal_growth_rate</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span>
+<span class="gp">   ...: </span>                       <span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [8]: </span><span class="n">forecast</span> <span class="o">=</span> <span class="n">simple_dcf</span><span class="o">.</span><span class="n">forecast</span><span class="p">()</span>
+
+<span class="gp">In [9]: </span><span class="n">forecast</span>
+<span class="gh">Out[9]: </span><span class="go"></span>
+<span class="go">    Year       Sales       COGS  ...  Change in NWC        FCF  Discounted FCF</span>
+<span class="go">-1  2019  100.000000  50.000000  ...       0.000000  18.000000             NaN</span>
+<span class="go"> 0  2020  103.000000  51.500000  ...       0.300000  18.250300       18.250300</span>
+<span class="go"> 1  2021  106.090000  53.045000  ...       0.309000  18.797809       16.489306</span>
+<span class="go"> 2  2022  109.272700  54.636350  ...       0.318270  19.361743       14.898233</span>
+<span class="go"> 3  2023  112.550881  56.275441  ...       0.327818  19.942596       13.460684</span>
+<span class="go"> 4  2024  115.927407  57.963704  ...       0.337653  20.540873       12.161846</span>
+<span class="go"> 5  2025  119.405230  59.702615  ...       0.347782  21.157100       10.988335</span>
+
+<span class="go">[7 rows x 18 columns]</span>
+
+<span class="gp">In [10]: </span><span class="nb">round</span><span class="p">(</span><span class="n">simple_dcf</span><span class="o">.</span><span class="n">enterprise_value</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gh">Out[10]: </span><span class="go">87.810000000000002</span>
+
+<span class="gp">In [11]: </span><span class="nb">round</span><span class="p">(</span><span class="n">simple_dcf</span><span class="o">.</span><span class="n">equity_value</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gh">Out[11]: </span><span class="go">82.810000000000002</span>
 </pre></div>
 </div>
-<p>The code above will provide a filled out pandas DataFrame with estimated growth of different
-line items from the income statement.</p>
 </div>
 
 

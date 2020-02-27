@@ -174,7 +174,7 @@ and relation of line items (e.g. R&amp;D, Capex, COGS) to sales.</p>
 <dt id="autodcf.models.DCF">
 <em class="property">class </em><code class="sig-prename descclassname">autodcf.models.</code><code class="sig-name descname">DCF</code><span class="sig-paren">(</span><em class="sig-param">company</em>, <em class="sig-param">sales_growth</em>, <em class="sig-param">discount_rate</em>, <em class="sig-param">terminal_growth_rate</em>, <em class="sig-param">window</em>, <em class="sig-param">cogs_to_sales</em>, <em class="sig-param">sga_to_sales</em>, <em class="sig-param">rd_to_sales</em>, <em class="sig-param">da_to_sales</em>, <em class="sig-param">interest_to_sales</em>, <em class="sig-param">tax_rate</em>, <em class="sig-param">capex_to_sales</em>, <em class="sig-param">change_in_nwc_to_change_in_sales</em><span class="sig-paren">)</span><a class="headerlink" href="#autodcf.models.DCF" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for flexible DCF.</p>
-<p>Note that all <a href="#id2"><span class="problematic" id="id3">*</span></a>_to_sales args take either an iterable or float. If given a float, the DCF will
+<p>Note that all _to_sales args take either an iterable or float. If given a float, the DCF will
 use this constant across all time periods (ex: if given 0.45 for COGS, COGS will be 45% of sales
 for all forecasted periods). If given iterable, the first value will be the value used for the first
 year in the forecast and the last value will be the value used in the terminal year.</p>
@@ -201,6 +201,132 @@ deductible.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="method">
+<dt id="autodcf.models.DCF.capex_to_sales">
+<em class="property">property </em><code class="sig-name descname">capex_to_sales</code><a class="headerlink" href="#autodcf.models.DCF.capex_to_sales" title="Permalink to this definition">¶</a></dt>
+<dd><p>Capital expenditures as a percentage of sales.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.models.DCF.change_in_nwc_to_change_in_sales">
+<em class="property">property </em><code class="sig-name descname">change_in_nwc_to_change_in_sales</code><a class="headerlink" href="#autodcf.models.DCF.change_in_nwc_to_change_in_sales" title="Permalink to this definition">¶</a></dt>
+<dd><p>How much net working capital is expected to need to increase for each dollar increase in sales.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.models.DCF.cogs_to_sales">
+<em class="property">property </em><code class="sig-name descname">cogs_to_sales</code><a class="headerlink" href="#autodcf.models.DCF.cogs_to_sales" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cost of goods sold as a percentage of sales.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.models.DCF.company">
+<em class="property">property </em><code class="sig-name descname">company</code><a class="headerlink" href="#autodcf.models.DCF.company" title="Permalink to this definition">¶</a></dt>
+<dd><p>Company object to do DCF for.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.models.DCF.da_to_sales">
+<em class="property">property </em><code class="sig-name descname">da_to_sales</code><a class="headerlink" href="#autodcf.models.DCF.da_to_sales" title="Permalink to this definition">¶</a></dt>
+<dd><p>Depreciation and amortization as a percentage of sales.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.models.DCF.discount_rate">
+<em class="property">property </em><code class="sig-name descname">discount_rate</code><a class="headerlink" href="#autodcf.models.DCF.discount_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Discount rate to discount cash flow at.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.models.DCF.discounted_terminal_cash_flow">
+<em class="property">property </em><code class="sig-name descname">discounted_terminal_cash_flow</code><a class="headerlink" href="#autodcf.models.DCF.discounted_terminal_cash_flow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sum of discounted cash flows after window.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.models.DCF.discounted_window_cash_flow">
+<em class="property">property </em><code class="sig-name descname">discounted_window_cash_flow</code><a class="headerlink" href="#autodcf.models.DCF.discounted_window_cash_flow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add up discounted cash flows from window.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.models.DCF.enterprise_value">
+<em class="property">property </em><code class="sig-name descname">enterprise_value</code><a class="headerlink" href="#autodcf.models.DCF.enterprise_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enterprise value given by discounted cash flow analysis.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.models.DCF.equity_value">
+<em class="property">property </em><code class="sig-name descname">equity_value</code><a class="headerlink" href="#autodcf.models.DCF.equity_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns total equity value of firm.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.models.DCF.equity_value_per_share">
+<em class="property">property </em><code class="sig-name descname">equity_value_per_share</code><a class="headerlink" href="#autodcf.models.DCF.equity_value_per_share" title="Permalink to this definition">¶</a></dt>
+<dd><p>Equity value divided by total number of shares outstanding.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.models.DCF.forecast">
+<code class="sig-name descname">forecast</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autodcf.models.DCF.forecast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get pandas dataframe with all info needed to complete forecast.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>Pandas data frame with forecasted future income statements and discounted</dt><dd><p>free cash flows.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>forecast (pd.DataFrame)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.models.DCF.interest_to_sales">
+<em class="property">property </em><code class="sig-name descname">interest_to_sales</code><a class="headerlink" href="#autodcf.models.DCF.interest_to_sales" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interest expense as a percentage of sales.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.models.DCF.rd_to_sales">
+<em class="property">property </em><code class="sig-name descname">rd_to_sales</code><a class="headerlink" href="#autodcf.models.DCF.rd_to_sales" title="Permalink to this definition">¶</a></dt>
+<dd><p>Research and development costs as a percentage of sales.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.models.DCF.sales_growth">
+<em class="property">property </em><code class="sig-name descname">sales_growth</code><a class="headerlink" href="#autodcf.models.DCF.sales_growth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Numpy array of sales growth for each year until end of window.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.models.DCF.sga_to_sales">
+<em class="property">property </em><code class="sig-name descname">sga_to_sales</code><a class="headerlink" href="#autodcf.models.DCF.sga_to_sales" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selling, general, and administrative costs as a percentage of sales.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.models.DCF.tax_rate">
+<em class="property">property </em><code class="sig-name descname">tax_rate</code><a class="headerlink" href="#autodcf.models.DCF.tax_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Effective tax rate for company.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.models.DCF.terminal_growth_rate">
+<em class="property">property </em><code class="sig-name descname">terminal_growth_rate</code><a class="headerlink" href="#autodcf.models.DCF.terminal_growth_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rate at which sales are expected to grow perpetually.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autodcf.models.DCF.window">
+<em class="property">property </em><code class="sig-name descname">window</code><a class="headerlink" href="#autodcf.models.DCF.window" title="Permalink to this definition">¶</a></dt>
+<dd><p>Periods of normal sales growth until terminal growth rate takes over.</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>
