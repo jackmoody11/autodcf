@@ -46,7 +46,8 @@ class DCF(AbstractDCF):
                  interest_to_sales,
                  tax_rate,
                  capex_to_sales,
-                 change_in_nwc_to_change_in_sales):
+                 change_in_nwc_to_change_in_sales,
+                 terminal_discount_rate=None):
         self._company = company
         self._sales_growth = sales_growth
         self._discount_rate = discount_rate
@@ -61,6 +62,7 @@ class DCF(AbstractDCF):
         self._capex_to_sales = capex_to_sales
         self._change_in_nwc_to_change_in_sales = change_in_nwc_to_change_in_sales
         self._forecast = pd.DataFrame(index=np.arange(-1, self.window + 1))
+        self._terminal_discount_rate = discount_rate if terminal_discount_rate is None else terminal_discount_rate
 
     @property
     def company(self):
@@ -76,6 +78,11 @@ class DCF(AbstractDCF):
     def discount_rate(self):
         """Discount rate to discount cash flow at."""
         return self._discount_rate
+
+    @property
+    def terminal_discount_rate(self):
+        """Discount rate after terminal year."""
+        return self._terminal_discount_rate
 
     @property
     def terminal_growth_rate(self):
@@ -211,8 +218,8 @@ class DCF(AbstractDCF):
         """Sum of discounted cash flows after window."""
         f = self.forecast()
         last_fcf = f.loc[self.window, 'Discounted FCF']
-        discount_minus_growth = (self.discount_rate - self.terminal_growth_rate)
-        tv_discounted_to_window = last_fcf * self.terminal_growth_rate / discount_minus_growth
+        terminal_discount_minus_growth = (self.terminal_discount_rate - self.terminal_growth_rate)
+        tv_discounted_to_window = last_fcf * (1 + self.terminal_growth_rate) / terminal_discount_minus_growth
         return tv_discounted_to_window / (1 + self.discount_rate) ** self.window
 
     @property
@@ -220,3 +227,11 @@ class DCF(AbstractDCF):
         """Add up discounted cash flows from window."""
         f = self.forecast()
         return f.loc[0:, 'Discounted FCF'].sum()
+
+    @property
+    def absolute_upside_per_share(self):
+        return self.equity_value_per_share - self.company.price_per_share
+
+    @property
+    def percent_upside_per_share(self):
+        return self.absolute_upside_per_share / self.company.price_per_share
