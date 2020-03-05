@@ -48,3 +48,9 @@ class TestDCF:
     def test_equity_value(self, simple_dcf, expected_dcf_results):
         assert expected_dcf_results['equity_value'] == simple_dcf.equity_value
         assert expected_dcf_results['equity_value_per_share'] == simple_dcf.equity_value_per_share
+
+    def test_absolute_upside(self, simple_dcf, expected_dcf_results):
+        assert expected_dcf_results['absolute_upside_per_share'] == simple_dcf.absolute_upside_per_share
+
+    def test_percent_upside(self, simple_dcf, expected_dcf_results):
+        assert expected_dcf_results['percent_upside_per_share'] == simple_dcf.percent_upside_per_share
