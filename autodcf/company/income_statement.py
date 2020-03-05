@@ -53,7 +53,11 @@ class IncomeStatement:
         self._depreciation = depreciation
         self._amortization = amortization
         self._start_date = start_date
-        self._end_date = end_date
+        if start_date < end_date:
+            self._end_date = end_date
+        else:
+            raise ValueError("End date must be after start date. "
+                             "Given start date {0} and end date {1}".format(start_date, end_date))
 
     @property
     def sales(self):

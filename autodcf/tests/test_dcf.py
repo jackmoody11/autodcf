@@ -1,7 +1,10 @@
-import numpy as np
 import pytest
 
+import numpy as np
+import pandas as pd
+
 from autodcf.models import SimpleDCF
+from autodcf.tests.utils import datapath
 
 
 @pytest.fixture
@@ -13,6 +16,11 @@ def simple_dcf(company):
                      tax_rate=0.21,
                      terminal_growth_rate=0.03,
                      window=5)
+
+
+@pytest.fixture
+def expected_dcf_results():
+    return pd.read_excel(datapath('simple_dcf.xlsx'), sheet_name='Results', index_col=0, squeeze=True)
 
 
 class TestDCF:
@@ -32,6 +40,17 @@ class TestDCF:
     def test_window(self, simple_dcf):
         assert simple_dcf.window == 5
 
-    # TODO: Test if forecasted DataFrame is correct (just look at discounted cash flows)
-    def test_forecast(self, simple_dcf):
-        pass
+    def test_forecast(self, simple_dcf, expected_dcf_results):
+        assert expected_dcf_results['enterprise_value'] == simple_dcf.enterprise_value
+        assert expected_dcf_results['discounted_window_cash_flow'] == simple_dcf.discounted_window_cash_flow
+        assert expected_dcf_results['discounted_terminal_cash_flow'] == simple_dcf.discounted_terminal_cash_flow
+
+    def test_equity_value(self, simple_dcf, expected_dcf_results):
+        assert expected_dcf_results['equity_value'] == simple_dcf.equity_value
+        assert expected_dcf_results['equity_value_per_share'] == simple_dcf.equity_value_per_share
+
+    def test_absolute_upside(self, simple_dcf, expected_dcf_results):
+        assert expected_dcf_results['absolute_upside_per_share'] == simple_dcf.absolute_upside_per_share
+
+    def test_percent_upside(self, simple_dcf, expected_dcf_results):
+        assert expected_dcf_results['percent_upside_per_share'] == simple_dcf.percent_upside_per_share

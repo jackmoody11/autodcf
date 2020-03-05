@@ -1,5 +1,7 @@
 import pytest
 
+from datetime import datetime
+
 from autodcf.company import IncomeStatement
 
 
@@ -13,7 +15,9 @@ def income_statement():
                            amortization=2,
                            interest=0,
                            nonrecurring_cost=5,
-                           tax=5)
+                           tax=5,
+                           start_date=datetime(2019, 1, 1),
+                           end_date=datetime(2020, 1, 1))
 
 
 class TestIncomeStatement:
@@ -73,3 +77,23 @@ class TestIncomeStatement:
     def test_set_interest(self, income_statement):
         income_statement.interest = 100
         assert income_statement.interest == 100
+
+    def test_start_date(self, income_statement):
+        assert income_statement.start_date == datetime(2019, 1, 1)
+
+    def test_end_date(self, income_statement):
+        assert income_statement.end_date == datetime(2020, 1, 1)
+
+    def test_end_date_after_start_date(self):
+        with pytest.raises(ValueError):
+            return IncomeStatement(sales=0,
+                                   cogs=0,
+                                   sga=0,
+                                   rd=0,
+                                   depreciation=0,
+                                   amortization=0,
+                                   nonrecurring_cost=0,
+                                   interest=0,
+                                   tax=0,
+                                   start_date=datetime(2020, 3, 3),
+                                   end_date=datetime(2020, 1, 1))

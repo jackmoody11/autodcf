@@ -30,6 +30,26 @@ def replacement_balance_sheet():
                         minority_interest=500)
 
 
+@pytest.fixture
+def replacement_income_statement():
+    from autodcf.company import IncomeStatement
+    return IncomeStatement(sales=1000,
+                           cogs=300,
+                           sga=200,
+                           rd=50,
+                           depreciation=10,
+                           amortization=5,
+                           nonrecurring_cost=30,
+                           interest=15,
+                           tax=200)
+
+
+@pytest.fixture
+def replacement_cash_flows():
+    from autodcf.company import CashFlows
+    return CashFlows(capex=300)
+
+
 class TestCompany:
     def test_fully_diluted_shares(self, company):
         assert company.fully_diluted_shares == 10
@@ -46,18 +66,28 @@ class TestCompany:
     def test_income_statement(self, company, income_statement):
         assert company.income_statement is income_statement
 
-    def test_set_cash_flows(self, company, income_statement, balance_sheet):
+    def test_set_bad_cash_flows(self, company, income_statement, balance_sheet):
         """Cash flows should only be CashFlow object."""
         with pytest.raises(TypeError):
             company.cash_flows = income_statement
         with pytest.raises(TypeError):
             company.cash_flows = balance_sheet
 
-    def test_set_income_statement(self, company, balance_sheet, cash_flows):
+    def test_set_good_cash_flows(self, company, cash_flows, replacement_cash_flows):
+        assert company.cash_flows == cash_flows
+        company.cash_flows = replacement_cash_flows
+        assert company.cash_flows == replacement_cash_flows
+
+    def test_set_bad_income_statement(self, company, balance_sheet, cash_flows):
         with pytest.raises(TypeError):
             company.income_statement = balance_sheet
         with pytest.raises(TypeError):
             company.income_statement = cash_flows
+
+    def test_set_good_income_statement(self, company, income_statement, replacement_income_statement):
+        assert company.income_statement == income_statement
+        company.income_statement = replacement_income_statement
+        assert company.income_statement == replacement_income_statement
 
     def test_set_price_per_share(self, company):
         company.price_per_share = 100

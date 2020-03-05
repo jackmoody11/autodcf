@@ -26,7 +26,7 @@ class BalanceSheet:
         deferred_lt_liabilities (float): Deferred long-term liabilities from balance sheet.
         minority_interest (float): Minority interest from balance sheet.
         date (datetime.datetime, optional): Date balance sheet was released.
-        other_lt_liability_debt_percent (float, optional): Percent of long-term liabilities that are long-term debt.
+        other_lt_liability_debt_multiplier (float, optional): Long-term liabilities that are long-term debt.
             Should be between 0 and 1 inclusive. Defaults to 0.
     """
 
@@ -50,7 +50,7 @@ class BalanceSheet:
                  deferred_lt_liabilities,
                  minority_interest,
                  date=None,
-                 other_lt_liability_debt_percent=0):
+                 other_lt_liability_debt_multiplier=0):
         # Current assets
         self._cash = cash
         self._short_term_investments = short_term_investments
@@ -78,7 +78,7 @@ class BalanceSheet:
         self._minority_interest = minority_interest
 
         # Options
-        self._other_lt_liability_debt_percent = other_lt_liability_debt_percent
+        self._other_lt_liability_debt_multiplier = other_lt_liability_debt_multiplier
         self._date = date
 
     @property
@@ -226,7 +226,7 @@ class BalanceSheet:
     def net_debt(self):
         """Net debt (derived from short and long-term debt minus cash-like assets)."""
         return (self.short_term_debt + self.long_term_debt
-                + self.other_lt_liabilities * self.other_lt_liability_debt_percent  # noqa: W503
+                + self.other_lt_liabilities * self.other_lt_liability_debt_multiplier  # noqa: W503
                 - self.cash - self.short_term_investments)  # noqa: W503
 
     @property
@@ -252,5 +252,5 @@ class BalanceSheet:
             raise TypeError
 
     @property
-    def other_lt_liability_debt_percent(self):
-        return self._other_lt_liability_debt_percent
+    def other_lt_liability_debt_multiplier(self):
+        return self._other_lt_liability_debt_multiplier
