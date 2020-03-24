@@ -28,7 +28,7 @@ or
 .. code:: bash
 
      $ git clone https://github.com/jackmoody11/autodcf.git
-     $ cd SECEdgar
+     $ cd autodcf
      $ pip install .
 
 **Note:**

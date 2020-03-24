@@ -4,7 +4,7 @@ import codecs
 from setuptools import setup, find_packages
 from setuptools.command.install import install
 
-SUPPORTED_VERSIONS = ['3.6', '3.7', '3.8']
+SUPPORTED_VERSIONS = ['3.5', '3.6', '3.7', '3.8']
 here = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -49,13 +49,13 @@ setup(
         license='MIT License',
         author='Jack Moody',
         author_email='moodyjack11@gmail.com',
-        description="""Build discounted cash flow (DCF) models with ease. Allows for advanced manipulation 
-        of future growth and exports to Excel.""",  # noqa: W291
+        description="""Build discounted cash flow (DCF) models with ease. Allows for advanced manipulation
+        of future growth for more accurate equity valuations.""",  # noqa: W291
         long_description=LONG_DESCRIPTION,
         long_description_content_type='text/x-rst',
-        entry_points='''
+        entry_points="""
             [console_scripts]
-            ''',
+            """,
         cmdclass={
             'install': install,
         },
@@ -71,6 +71,7 @@ setup(
             'Operating System :: OS Independent',
             'Programming Language :: Python',
             'Topic :: Software Development :: Libraries :: Python Modules',
+            'Programming Language :: Python :: 3.5',
             'Programming Language :: Python :: 3.6',
             'Programming Language :: Python :: 3.7',
             'Programming Language :: Python :: 3.8'
