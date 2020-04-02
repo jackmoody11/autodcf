@@ -3,6 +3,9 @@ Auto DCF
 .. image:: https://github.com/jackmoody11/autodcf/workflows/Tests/badge.svg
     :target: https://github.com/jackmoody11/autodcf/actions
 
+.. image:: https://badge.fury.io/py/autodcf.svg
+    :target: https://badge.fury.io/py/autodcf
+
 The autodcf package aims to make it extremely simple to create DCF models, simple and complex alike.
 If you are tired of running sensitivity tests to see how your model will behave with different sales growth patterns, this package is for you.
 
