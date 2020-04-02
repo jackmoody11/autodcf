@@ -36,8 +36,8 @@ def parse_requirements(*files):
 
 
 # Get the long description from the relevant file
-with codecs.open('README.rst', encoding='utf-8') as f:
-    LONG_DESCRIPTION = f.read()
+with codecs.open('README.rst', encoding='utf-8') as README:
+    LONG_DESCRIPTION = README.read()
 
 setup(
         name='autodcf',
