@@ -12,5 +12,13 @@ venv/
 # Testing
 .coverage
 
-# Generated files to be excluded
+# Docs build
 docs/build/
+
+# Dist
+build/
+dist/
+autodcf.egg-info/
+
+# OS Specific
+.DS_Store
