@@ -64,11 +64,6 @@ or ``DCF``).
 The code above will provide a filled out pandas DataFrame with estimated growth of different
 line items from the income statement.
 
-TODO
-----
-- Add docs and deploy using doctr to GitHub Pages site (automate deployment with Travis CI)
-- Publish package to PyPi
-
 
 Future Enhancements
 -------------------
